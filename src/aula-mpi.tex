@@ -1,4 +1,4 @@
-\documentclass[10pt, compress, aspectratio=169]{beamer}
+\documentclass[12pt, compress]{beamer}
 
 \usetheme[numbering=fraction, progressbar=none, titleformat=smallcaps, sectionpage=none]{metropolis}
 
@@ -57,7 +57,7 @@
 
 \graphicspath{{../img/}}
 
-\title{Introdução a MPI}
+\title{Introdução a Message Passing Interface (MPI)}
 \author{\footnotesize Pedro Bruel \\ {\scriptsize \emph{phrb@ime.usp.br}}}
 \institute{\includegraphics[height=2cm]{imelogo}\\[0.2cm] Instituto de Matemática e Estatística \\ Universidade de São Paulo}
 \date{\scriptsize \today}
@@ -81,55 +81,105 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Message Passing Interface}
+    \frametitle{Modelos de Programação Paralela}
+    \begin{itemize}
+        \item Interação entre processos:
+            \begin{itemize}
+                \item Memória compartilhada: pthreads, OpenMP
+                \item \alert{Troca de mensagens}: Message Passing Interface (MPI)
+                \item Interação implícita: Paralelização automática
+            \end{itemize}
+    \end{itemize}
+
+    \begin{itemize}
+        \item Decomposição do problema:
+            \begin{itemize}
+                \item \alert{Paralelismo de tarefas}: MPI
+                \item Paralelismo de dados: GPUs
+                \item Paralelismo implícito: \textit{instruction-level parallelism}
+            \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Modelo de Programação}
+    \frametitle{Message Passing Interface (MPI)}
+    \begin{center}
+        \includegraphics[width=.3\textwidth]{mpi-logo}
+    \end{center}
+
+    Message Passing Interface (\alert{MPI}):
+
+    \begin{itemize}
+        \item \alert{Troca de mensagens} entre \alert{processos}
+        \item \alert{Padronizado} e \alert{portável}
+        \item Implementações em diversas \alert{linguagens} e
+            \alert{arquiteturas}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
-    \frametitle{API}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    #include <cuda_runtime.h>
-
-    float *h_A = (float *) malloc(size);
-    if (h_A == NULL) { ... };
-
-    float *d_A = NULL;
-    err = cudaMalloc((void **) &d_A, size);
-    err = cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
-    if (err != cudaSuccess) { ... };
-
-    int threadsPerBlock = 256;
-    int blocksPerGrid = (numElements + threadsPerBlock - 1) / threadsPerBlock;
-
-    vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, numElements);
-
-    err = cudaGetLastError();
-    err = cudaDeviceSynchronize();
-    if (err != cudaSuccess) { ... };
-
-    err = cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
-    err = cudaFree(d_A);
-    if (err != cudaSuccess) { ... };
-    \end{lstlisting}
-
-    \vfill
-
+\begin{frame}
+    \frametitle{MPI: Conceitos Básicos}
     \begin{center}
-        \tiny{Fonte: \url{github.com/phrb/intro-cuda} [Accessed in 29/07/16]}
+        \includegraphics[width=.3\textwidth]{mpi-logo}
+    \end{center}
+
+    Conceitos básicos:
+
+    \begin{itemize}
+        \item \alert{Communicator}
+        \item \alert{Point-to-Point} communication
+        \item \alert{Collective} communication
+        \item \alert{Datatypes}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{MPI: Modelo de Programação}
+    \begin{center}
+        \includegraphics[width=\textwidth]{hybrid-mem}
     \end{center}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Exemplos}
+    \frametitle{Usando MPI + OpenMP}
+    \begin{center}
+        \includegraphics[width=\textwidth]{hybrid-model}
+    \end{center}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{OpenMPI}
+    \begin{center}
+        \includegraphics[width=.3\textwidth]{open-mpi-logo}
+    \end{center}
+
+    \alert{OpenMPI}:
+
     \begin{itemize}
-        \item Hello World: \textit{Blocking} \& \textit{Nonblocking}
-        \item Calculando Pi: \textit{Reduce} \& \textit{Send}
-        \item Calculando Primos
-        \item Medindo Largura de Banda
-        \item Dissipação de Calor 2D
+        \item Implementação \alert{open-source} do padrão MPI
+        \item Bastante usado em supercomputadores da \alert{TOP 500}
+        \item \url{open-mpi.org}
+        \item \url{github.com/open-mpi/ompi}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{API e Exemplos}
+    \begin{itemize}
+        \item \alert{Tutorial}: \url{computing.llnl.gov/tutorials/mpi}
+        \item \alert{Código}: \url{github.com/phrb/aula-mpi}
+        \item \alert{Documentação}: \url{open-mpi.org/doc/current}
+    \end{itemize}
+
+    Vamos usar MPI para:
+
+    \begin{itemize}
+        \item Comunicação simples: \textit{blocking} \& \textit{nonblocking}
+        \item Calcular $\pi$: \textit{reduce} \& \textit{send}
+        \item Calcular números primos
+        \item Medir largura de banda da comunicação
+        \item Calcular dissipação de calor 2D
     \end{itemize}
 \end{frame}
 
