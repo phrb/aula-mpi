@@ -25,13 +25,13 @@ double dboard (int darts);
 
 int main (int argc, char *argv[])
 {
-    double    homepi,         /* value of pi calculated by current task */
-              pisum,            /* sum of tasks' pi values */
-              pi,            /* average of pi after "darts" is thrown */
-              avepi;            /* average pi value for all iterations */
-    int    taskid,            /* task ID - also used as seed number */
-           numtasks,       /* number of tasks */
-           rc,             /* return code */
+    double homepi,        /* value of pi calculated by current task */
+           pisum,         /* sum of tasks' pi values */
+           pi,            /* average of pi after "darts" is thrown */
+           avepi;         /* average pi value for all iterations */
+    int    taskid,        /* task ID - also used as seed number */
+           numtasks,      /* number of tasks */
+           rc,            /* return code */
            i;
     MPI_Status status;
 
@@ -109,7 +109,7 @@ int main (int argc, char *argv[])
 
 double dboard(int darts)
 {
-#define sqr(x)    ((x)*(x))
+    #define sqr(x) ((x)*(x))
     long random(void);
     double x_coord, y_coord, pi, r;
     int score, n;

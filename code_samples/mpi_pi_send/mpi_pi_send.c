@@ -24,11 +24,11 @@ double dboard (int darts);
 
 int main (int argc, char *argv[])
 {
-    double    homepi,         /* value of pi calculated by current task */
-              pi,             /* average of pi after "darts" is thrown */
-              avepi,          /* average pi value for all iterations */
-              pirecv,         /* pi received from worker */
-              pisum;          /* sum of workers pi values */
+    double homepi,         /* value of pi calculated by current task */
+           pi,             /* average of pi after "darts" is thrown */
+           avepi,          /* average pi value for all iterations */
+           pirecv,         /* pi received from worker */
+           pisum;          /* sum of workers pi values */
     int    taskid,         /* task ID - also used as seed number */
            numtasks,       /* number of tasks */
            source,         /* source of incoming message */ 
@@ -122,7 +122,7 @@ int main (int argc, char *argv[])
 
 double dboard(int darts)
 {
-#define sqr(x)    ((x)*(x))
+    #define sqr(x)    ((x)*(x))
     long random(void);
     double x_coord, y_coord, pi, r; 
     int score, n;
