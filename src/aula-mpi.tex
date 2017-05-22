@@ -66,30 +66,30 @@
 
 \maketitle
 
-\section{Introduction}
-
-\subsection{Index}
-
-\begin{frame}
-    \frametitle{Index}
-    \setbeamertemplate{section in toc}[sections numbered]
-    \tableofcontents[hideallsubsections]
-\end{frame}
+\section{Introdução}
 
 \begin{frame}
     \frametitle{Slides}
     \begin{center}
         \includegraphics[width=.18\textwidth]{github}
     \end{center}
-    The slides and all source code are hosted at \alert{GitHub}:
+    Os slides e todo o código fonte estão no \alert{GitHub}:
 
     \begin{itemize}
-        \item \url{github.com/phrb/---}
+        \item \url{github.com/phrb/aula-mpi}
     \end{itemize}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Message Passing Interface}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modelo de Programação}
+\end{frame}
+
 \begin{frame}[fragile]
-    \frametitle{Sample Code}
+    \frametitle{API}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     #include <cuda_runtime.h>
 
@@ -120,6 +120,17 @@
     \begin{center}
         \tiny{Fonte: \url{github.com/phrb/intro-cuda} [Accessed in 29/07/16]}
     \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Exemplos}
+    \begin{itemize}
+        \item Hello World: \textit{Blocking} \& \textit{Nonblocking}
+        \item Calculando Pi: \textit{Reduce} \& \textit{Send}
+        \item Calculando Primos
+        \item Medindo Largura de Banda
+        \item Dissipação de Calor 2D
+    \end{itemize}
 \end{frame}
 
 \maketitle
